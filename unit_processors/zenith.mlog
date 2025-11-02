@@ -1,19 +1,23 @@
-read unit_on cell1 6
-jump 15 equal unit_on false
-ubind @quad
+read unit_on cell1 3
+jump unbind_unit equal unit_on false
+ubind @zenith
 sensor cont @unit @controller
 jump normal equal cont @unit
 jump other_proc notEqual cont @this
 normal:
-write 0 cell1 25
+write 0 cell1 22
 jump start always 0 0
 other_proc:
-write 1 cell1 25
+write 1 cell1 22
 unbind_unit:	
 ucontrol unbind 0 0 0 0 0
 end
 
 start:
+sensor unit_x @unit @x
+sensor unit_y @unit @y
+sensor range @unit @range
+
 sensor item_cap @unit @itemCapacity
 sensor blast @unit @blast-compound
 sensor items @unit @totalItems
@@ -39,8 +43,6 @@ idle_pickup:	#idle but picking up blast
 sensor center_idle_x cell1 @x
 sensor center_idle_y cell1 @y
 idle_around_cursor:
-sensor unit_x @unit @x
-sensor unit_y @unit @y
 op sub dx unit_x center_idle_x
 op sub dy unit_y center_idle_y
 op sub px1 dx dy
@@ -52,41 +54,38 @@ op mul py p_len py1
 op add next_pos_x center_idle_x px
 op add next_pos_y center_idle_y py
 ucontrol move next_pos_x next_pos_y
-jump target_enemy_unit always 0 0
+uradar enemy any any health 0 1 enemy
+ucontrol targetp enemy 1 1 0 0
+end
 
 player_controled:
 sensor target_x wave1 @shootX
 sensor target_y wave1 @shootY
 sensor always_dive switch1 @enabled
-jump dive equal always_dive 1
+jump attack_target equal always_dive 1
 sensor dive_on_target wave1 @shooting
-jump dive equal dive_on_target true
+jump attack_target equal dive_on_target true
 set radius 20
 set center_idle_x target_x
 set center_idle_y target_y
 jump idle_around_cursor always 0 0
-dive:
-ucontrol move target_x target_y
-ucontrol target target_x target_y 1 0 0
-end
 
 attacking:
-ulocate building turret true @copper outx outy found building
+ulocate building turret true @copper target_x target_y found building
 sensor attack_defences_only switch2 @enabled
-jump attack_building equal attack_defences_only true
-ucontrol within outx outy 30 turret_in_range 0		#30 is the range to clear around a core before attacking it
-jump attack_building equal turret_in_range true
-ulocate building core true @copper outx outy found building		#override outx & outy with core pos
-attack_building:
-ucontrol move outx outy 0 0 0
-
-sensor range @unit @range		#target an enemy if the block target is not in range
-ucontrol within outx outy range target_in_range 0 
-jump target_enemy_unit equal target_in_range false
-
-ucontrol target outx outy 1 0		#target the turret
+jump attack_target equal attack_defences_only true
+ucontrol within target_x target_y 30 turret_in_range 0		#30 is the range to clear around a core before attacking it
+jump attack_target equal turret_in_range true
+ulocate building core true @copper target_x target_y found building		#override target_x & target_y with core pos
+attack_target:
+op sub vect2target_x target_x unit_x
+op sub vect2target_y target_y unit_y
+op len vect2target_len vect2target_x vect2target_y
+op div vect_shoot_len range vect2target_len
+op mul vect_shoot_x vect2target_x vect_shoot_len
+op mul vect_shoot_y vect2target_y vect_shoot_len
+op add shoot_x vect_shoot_x unit_x
+op add shoot_y vect_shoot_y unit_y
+ucontrol target shoot_x shoot_y 1 0 0
+ucontrol move target_x target_y 0 0 0
 end
-
-target_enemy_unit:
-uradar enemy any any health 0 1 enemy
-ucontrol targetp enemy 1 1 0 0

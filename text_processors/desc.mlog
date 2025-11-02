@@ -8,16 +8,17 @@ print "\n\nThis option can be turned off on the [#e75dfc]"
 print "control panel[white]."
 printflush message2
 
-print "[#e75dfc]Bombing Ai v1.0\n[white]By [orange]Gruwhh "
+print "[#e75dfc]Bombing Ai v1.1\n[white]By [orange]Gruwhh "
 print "[white]and [#00FFFF]m[#00BFFF]y[#0080FF]s[#0040F]t⚡"
-print "\n\n[yellow]The most advanced Bombing Ai yet"
 print "\n\n[#e75dfc]Main Features :\n[white]"		#replace with ChangeLog for future versions
 print "- A Periodic attack Mode.\n"
 print "- Units take bc from any vault on their path.\n"
 print "- Doesn't conflict with other processors"
+print "\n\n[yellow]Changelog\n[white]"
+print "- units now always attack towards their target, even when it isnt in range"
 printflush message3
 
-print "[#e75dfc]Bombing Ai v1.0\n\n"
+print "[#e75dfc]Bombing Ai v1.1\n\n"
 print "[white]By [orange]Gruwhh\n"
 print "[#6572ff]discord [#e75dfc]: [#6572ff]gruwhh\n\n"		# #5865f2 is the discord blue we use #6572ff instead because mindustry is wierd
 print "[white]And  by [#00FFFF]m[#00BFFF]y[#0080FF]s[#0040F]t⚡\n"

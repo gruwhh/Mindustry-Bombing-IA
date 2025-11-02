@@ -3,14 +3,13 @@ print "[white]If [#7ede8c]enabled[white], shoots defences from afar while on ful
 printflush message1
 
 print "[green]Attack defences only\n\n"
-print "[white]If [#fa8e82]desactivaded[white], clears a 30 block radius around "
+print "[white]If [#fa8e82]deactivaded[white], clears a 30 block radius around "
 print "every core before destroying it. Only attacks defences otherwise."
 printflush message2
 
 print "[#6ec0ff]Always dive on target with manual control\n\n"
 print "[white]Units always dive on the target even when you dont shoot.\n\n"
-print "[orange]Recomended for mobile\n"
-print "[red]Is laggier for large number of units."
+print "[orange]Recomended for mobile"
 printflush message3
 
 print " [#ff9b38]Copper [white] [#ff9b38]: Attack\n\n"
