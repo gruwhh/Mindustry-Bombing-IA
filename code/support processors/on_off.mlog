@@ -1,0 +1,22 @@
+sensor on switch1 @enabled
+jump ai_on equal on true
+control enabled processor1 0 0 0 0
+control enabled processor2 0 0 0 0
+control enabled processor3 0 0 0 0
+control enabled processor4 0 0 0 0
+control enabled processor5 0 0 0 0
+control enabled processor6 0 0 0 0
+control enabled processor7 0 0 0 0
+control enabled processor8 0 0 0 0
+control enabled processor9 0 0 0 0
+end
+ai_on:
+control enabled processor1 1 0 0 0
+control enabled processor2 1 0 0 0
+control enabled processor3 1 0 0 0
+control enabled processor4 1 0 0 0
+control enabled processor5 1 0 0 0
+control enabled processor6 1 0 0 0
+control enabled processor7 1 0 0 0
+control enabled processor8 1 0 0 0
+control enabled processor9 1 0 0 0

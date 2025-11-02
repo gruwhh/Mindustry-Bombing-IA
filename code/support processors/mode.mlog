@@ -1,0 +1,37 @@
+sensor config sorter1 @config
+jump idle notEqual config @copper
+write 1 cell1 10
+idle:
+jump periodic_att notEqual config @lead
+write 0 cell1 10
+write 30 cell1 11
+periodic_att:
+jump END notEqual config @metaglass
+ubind @mono
+jump mono_exists notEqual @unit null
+write 0 cell1 30
+write 0 cell1 10
+jump END always 0 0
+mono_exists:
+write 1 cell1 30
+ulocate building turret true @copper outx outy found building
+ucontrol unbind 0 0 0 0 0
+op sub dx_target outx @thisx
+op sub dy_target outy @thisy
+op len dist2target dx_target dy_target
+op div time2target dist2target 0.004
+set base_delay 30000z
+op add delay time2target base_delay
+write delay cell1 62
+read saved_time cell1 63
+op add trigger_time saved_time delay
+jump END lessThan @time trigger_time
+write @time cell1 63
+read attack cell1 10
+jump attack notEqual attack 1
+write 0 cell1 10		#idle
+end
+attack:
+write 1 cell1 10zq
+END:
+end

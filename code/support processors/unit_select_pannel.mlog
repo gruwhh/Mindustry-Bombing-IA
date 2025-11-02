@@ -1,0 +1,85 @@
+draw image 29 145 @eclipse 32 0 0
+sensor s1 switch1 @enabled
+write s1 cell1 1
+sensor s2 switch2 @enabled
+write s2 cell1 2
+sensor s3 switch3 @enabled
+write s3 cell1 3
+sensor s4 switch4 @enabled
+write s4 cell1 4
+sensor s5 switch5 @enabled
+write s5 cell1 5
+sensor s6 switch6 @enabled
+write s6 cell1 6
+sensor s7 switch7 @enabled
+write s7 cell1 7
+sensor s8 switch8 @enabled
+write s8 cell1 8
+sensor s9 switch9 @enabled
+write s9 cell1 9
+draw clear 0 0 0 0 0 0
+jump 23 notEqual s1 false
+draw color 255 0 0 255 0 0
+jump 24 always s1 false
+draw color 0 255 0 255 0 0
+draw rect 0 0 59 59 0 0
+draw color 255 255 255 255 0 0
+draw image 29 29 @flare 32 0 0
+jump 30 notEqual s2 false
+draw color 255 0 0 255 0 0
+jump 31 always s1 false
+draw color 0 255 0 255 0 0
+draw rect 0 59 59 59 0 0
+draw color 255 255 255 255 0 0
+draw image 29 87 @horizon 32 0 0
+jump 37 notEqual s3 false
+draw color 255 0 0 255 0 0
+jump 38 always s1 false
+draw color 0 255 0 255 0 0
+draw rect 0 118 59 59 0 0
+draw color 255 255 255 255 0 0
+draw image 29 145 @zenith 32 0 0
+jump 44 notEqual s4 false
+draw color 255 0 0 255 0 0
+jump 45 always s1 false
+draw color 0 255 0 255 0 0
+draw rect 59 0 59 59 0 0
+draw color 255 255 255 255 0 0
+draw image 88 29 @antumbra 32 0 0
+jump 51 notEqual s5 false
+draw color 255 0 0 255 0 0
+jump 52 always s1 false
+draw color 0 255 0 255 0 0
+draw rect 59 59 59 59 0 0
+draw color 255 255 255 255 0 0
+draw image 88 87 @eclipse 32 0 0
+jump 58 notEqual s6 false
+draw color 255 0 0 255 0 0
+jump 59 always s1 false
+draw color 0 255 0 255 0 0
+draw rect 59 117 59 59 0 0
+draw color 255 255 255 255 0 0
+draw image 88 145 @quad 32 0 0
+jump 65 notEqual s7 false
+draw color 255 0 0 255 0 0
+jump 66 always s1 false
+draw color 0 255 0 255 0 0
+draw rect 118 0 59 59 0 0
+draw color 255 255 255 255 0 0
+draw image 147 29 @oct 32 0 0
+jump 72 notEqual s8 false
+draw color 255 0 0 255 0 0
+jump 73 always s1 false
+draw color 0 255 0 255 0 0
+draw rect 118 59 59 59 0 0
+draw color 255 255 255 255 0 0
+draw image 147 87 @quasar 32 0 0
+jump 79 notEqual s9 false
+draw color 255 0 0 255 0 0
+jump 80 always s1 false
+draw color 0 255 0 255 0 0
+draw rect 118 118 59 59 0 0
+draw color 255 255 255 255 0 0
+draw image 147 147 @vela 32 0 0
+drawflush display1
+control enabled wave1 0 0 0 0

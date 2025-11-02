@@ -1,0 +1,91 @@
+
+set sum 0
+read unit_other_processor cell1 20
+op add sum sum unit_other_processor
+read unit_other_processor cell1 21
+op add sum sum unit_other_processor
+read unit_other_processor cell1 22
+op add sum sum unit_other_processor
+read unit_other_processor cell1 23
+op add sum sum unit_other_processor
+read unit_other_processor cell1 24
+op add sum sum unit_other_processor
+read unit_other_processor cell1 25
+op add sum sum unit_other_processor
+read unit_other_processor cell1 26
+op add sum sum unit_other_processor
+read unit_other_processor cell1 27
+op add sum sum unit_other_processor
+read unit_other_processor cell1 28
+op add sum sum unit_other_processor
+
+print "[#e75dfc]Bombing Ai\n\n"
+sensor ON switch1 @enabled
+print "[white]Current status : "
+jump off equal ON false
+print "[green]ON\n\n"
+jump print_mode always 0 0
+off:
+control config sorter1 @blast-compound 0 0 0
+print "[red]OFF\n\n"
+print "[white]The [#83f57d]ON[white]/[#fa8e82]OFF [white]switch is on the opposite corner of the Ai."
+printflush message1
+end
+
+print_mode:
+print "[white]Mode :\n"
+sensor player_ctrl wave1 @controlled
+jump ctr_print equal player_ctrl @ctrlPlayer
+sensor mode sorter2 @config
+set mono_error false
+jump att_or_idle notEqual mode @metaglass
+print "Periodic Attacks\n"
+read mono cell1 30
+jump has_mono equal mono 1
+set mono_error true
+print "[orange]/!\ No mono found /!\\n[white]Currently : "
+jump att_or_idle always 0 0
+has_mono:
+set mono_error false
+read trigger_timer cell1 63
+read delay cell1 62
+op sub ms_delay1 trigger_timer @time
+op add ms_delay delay ms_delay1
+op div s_delay1 ms_delay 10
+op floor s_delay2 s_delay1 0
+op div s_delay s_delay2 100
+print "[#6ec0ff]"
+print s_delay
+print "s before changing mode.\n[white]Currently : "
+att_or_idle:
+read attack cell1 10
+jump att_print equal attack 1
+print "[#ab53cf]Idle\n\n"
+jump warnings always 0 0
+att_print:
+print "[red]Attacking\n\n"
+jump warnings always 0 0
+ctr_print:
+print "[#6ec0ff]Player controled\n\n"
+jump warnings always 0 0
+
+warnings:
+print "[orange]Warnings:\n"
+jump w_other_proc greaterThanEq sum 1
+jump w_no_mono equal mono_error true
+control config sorter1 @plastanium 0 0 0
+print "[green]Functionning as normal."
+printflush message1
+end
+w_other_proc:
+control config sorter1 @pyratite 0 0 0
+print "[red]Another AI is present on the "
+print "map.\nRemove it to resume "
+print "normal operation.\n\n"
+jump w_no_mono equal mono_error true
+printflush message1
+end
+w_no_mono:
+control config sorter1 @pyratite 0 0 0
+print "[red]There is no mono on the map. Use other modes or create a mono to use the [#fc9f9f]attack periodically [red]mode."
+printflush message1

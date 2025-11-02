@@ -1,0 +1,23 @@
+print "[#de4b4b]Antumbra and Eclipse smarter AI\n\n"
+print "[white]If [#7ede8c]enabled[white], shoots defences from afar while on full health."
+printflush message1
+
+print "[green]Attack defences only\n\n"
+print "[white]If [#fa8e82]desactivaded[white], clears a 30 block radius around "
+print "every core before destroying it. Only attacks defences otherwise."
+printflush message2
+
+print "[#6ec0ff]Always dive on target with manual control\n\n"
+print "[white]Units always dive on the target even when you dont shoot.\n\n"
+print "[orange]Recomended for mobile\n"
+print "[red]Is laggier for large number of units."
+printflush message3
+
+print " [#ff9b38]Copper [white] [#ff9b38]: Attack\n\n"
+print "[white] [#ab53cf]Lead [white] [#ab53cf]: Idle\n\n"
+print "[white] Metaglass  : Attack periodically\n"
+print "[red]/!\ NEEDS A MONO ON THE MAP"
+printflush message4
+
+print "[green]ON[white]/[red]OFF"
+printflush message5

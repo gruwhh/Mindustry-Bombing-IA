@@ -1,0 +1,69 @@
+read unit_on cell1 2
+jump 15 equal unit_on false
+ubind @horizon
+sensor cont @unit @controller
+jump normal equal cont @unit
+jump other_proc notEqual cont @this
+normal:
+write 0 cell1 21
+jump start always 0 0
+other_proc:
+write 1 cell1 21
+unbind_unit:	
+ucontrol unbind 0 0 0 0 0
+end
+
+start:
+sensor unit_x @unit @x
+sensor unit_y @unit @y
+
+unit_controls:
+sensor player_ctrl wave1 @controlled
+jump player_controled equal player_ctrl @ctrlPlayer
+read attack cell1 10
+jump attacking equal attack 1
+
+#idle in the center
+set radius 40	#idle around middle / waiting
+sensor center_idle_x cell1 @x
+sensor center_idle_y cell1 @y
+idle_around_cursor:
+op sub dx unit_x center_idle_x
+op sub dy unit_y center_idle_y
+op sub px1 dx dy
+op add py1 dx dy
+op len p1_len px1 py1
+op div p_len radius p1_len
+op mul px p_len px1
+op mul py p_len py1
+op add next_pos_x center_idle_x px
+op add next_pos_y center_idle_y py
+ucontrol move next_pos_x next_pos_y
+end
+
+player_controled:
+sensor target_x wave1 @shootX
+sensor target_y wave1 @shootY
+sensor always_dive switch1 @enabled
+jump dive equal always_dive 1
+sensor dive_on_target wave1 @shooting
+jump dive equal dive_on_target true
+set radius 20
+set center_idle_x target_x
+set center_idle_y target_y
+jump idle_around_cursor always 0 0
+dive:
+ucontrol move target_x target_y 0 0 0
+ucontrol target unit_x unit_y 1 0
+end
+
+attacking:	
+ulocate building turret true @copper outx outy found building
+sensor attack_defences_only switch2 @enabled
+jump attack_building equal attack_defences_only true
+ucontrol within outx outy 30 turret_in_range 0		#30 is the range to clear around a core before attacking it
+jump attack_building equal turret_in_range true
+ulocate building core true @copper outx outy found building		#override outx & outy with core pos
+attack_building:
+ucontrol move outx outy 0 0 0
+ucontrol target unit_x unit_y 1 0
