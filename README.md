@@ -1,7 +1,7 @@
 # Mindustry-Bombing-IA
 
 ## How to use the schematic
-- To use this schematic copy the content of the file schematic.txt then in game, open the schematics tab, press "import schematic" ant then "import from clipboard".
+- To use this schematic copy the content of the file schematic.txt then in game, open the schematics tab, press "import schematic" and then "import from clipboard".
 
 ## Description
 This projet's goal is to make the best bombing ai for the rapid gamemode of mindustry.
