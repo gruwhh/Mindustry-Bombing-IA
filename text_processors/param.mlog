@@ -15,7 +15,6 @@ printflush message3
 print " [#ff9b38]Copper [white] [#ff9b38]: Attack\n\n"
 print "[white] [#ab53cf]Lead [white] [#ab53cf]: Idle\n\n"
 print "[white] Metaglass  : Attack periodically\n"
-print "[red]/!\ NEEDS A MONO ON THE MAP"
 printflush message4
 
 print "[green]ON[white]/[red]OFF"

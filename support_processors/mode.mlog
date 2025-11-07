@@ -15,13 +15,7 @@ jump END always 0 0
 mono_exists:
 write 1 cell1 30
 ulocate building turret true @copper outx outy found building
-ucontrol unbind 0 0 0 0 0
-op sub dx_target outx @thisx
-op sub dy_target outy @thisy
-op len dist2target dx_target dy_target
-op div time2target dist2target 0.004
-set base_delay 30000z
-op add delay time2target base_delay
+set delay 30000
 write delay cell1 62
 read saved_time cell1 63
 op add trigger_time saved_time delay
