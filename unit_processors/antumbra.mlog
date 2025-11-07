@@ -36,12 +36,26 @@ sensor player_ctrl wave1 @controlled
 jump player_controled equal player_ctrl @ctrlPlayer
 read attack cell1 10
 jump attacking equal attack 1
+set radius 40		#compute idle center
+ulocate building turret true @copper def_x def_y found buildings
+sensor cell_x cell1 @x
+sensor cell_y cell1 @y
+op sub vect2def_x cell_x def_x
+op sub vect2def_y cell_y def_y
+op len vect2def_len vect2def_x vect2def_y
+op div idle_vect_len 100 vect2def_len
+op mul idle_vect_x vect2def_x idle_vect_len
+op mul idle_vect_y vect2def_y idle_vect_len
+op add center_idle_x idle_vect_x def_x
+op add center_idle_y idle_vect_y def_y
+jump idle_near_def always 0 0
 
-#idle in the center
-set radius 40	#idle around middle / waiting
+#spin
 idle_pickup:	#idle but picking up blast
 sensor center_idle_x cell1 @x
 sensor center_idle_y cell1 @y
+idle_near_def:	#idle mode
+
 idle_around_cursor:
 op sub dx unit_x center_idle_x
 op sub dy unit_y center_idle_y
