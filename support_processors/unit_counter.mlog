@@ -1,0 +1,19 @@
+set type @flare
+
+start:
+ubind type
+jump output equal @unit null
+jump output equal @unit first_unit
+jump increment_count notEqual first_unit null
+set first_unit @unit
+increment_count:
+op add unit_count unit_count 1
+sensor dead first_unit @dead
+jump reset equal dead 1
+jump start always 0 0
+output:
+print unit_count
+printflush message1
+reset:
+set unit_count 0
+set first_unit null
