@@ -1,24 +1,31 @@
-set next_unit 0
-set unit_counter 21
 set type @flare
-set @counter unit_counter
+set write_adr 1
+jump start always 0 0
 set type @horizon
-set @counter unit_counter
+set write_adr 2
+jump start always 0 0
 set type @zenith
-set @counter unit_counter
+set write_adr 3
+jump start always 0 0
 set type @antumbra
-set @counter unit_counter
+set write_adr 4
+jump start always 0 0
 set type @eclipse
-set @counter unit_counter
+set write_adr 5
+jump start always 0 0
 set type @quasar
-set @counter unit_counter
+set write_adr 6
+jump start always 0 0
 set type @vela
-set @counter unit_counter
+set write_adr 7
+jump start always 0 0
 set type @quad
-set @counter unit_counter
+set write_adr 8
+jump start always 0 0
 set type @oct
-set next_unit 0
-set @counter unit_counter
+set write_adr 9
+set next_unit -3
+jump start always 0 0
 start:
 ubind type
 jump output equal @unit null
@@ -28,13 +35,11 @@ set first_unit @unit
 increment_count:
 op add unit_count unit_count 1
 sensor dead first_unit @dead
-jump reset equal dead 1
+jump output equal dead 1
 jump start always 0 0
 output:
-reset:
-op add next_unit next_unit 2
-op div write_adr next_unit 2
-write unit_count cell1 write_adr	# adresses between 1 and 9. 1=oct, 2=flare, 3= horizon, ..., 8=quad
+op add next_unit next_unit 3
+write unit_count cell1 write_adr	# adresses between 1 and 9. 1=flare, 2=horizon, ..., 9=oct
 set unit_count 0
 set first_unit null
 set @counter next_unit
