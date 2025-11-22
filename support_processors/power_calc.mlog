@@ -1,0 +1,104 @@
+sensor s1 switch1 @enabled
+sensor s2 switch2 @enabled
+sensor s3 switch3 @enabled
+sensor s4 switch4 @enabled
+sensor s5 switch5 @enabled
+sensor s6 switch6 @enabled
+sensor s7 switch7 @enabled
+sensor s8 switch8 @enabled
+sensor s9 switch9 @enabled
+
+# unit_pow variable uses a magic number to estimate the impact of a single unit
+# these values are subject to change
+
+read flare cell1 1
+op mul flare_pow flare 1
+op mul flare_used flare s1
+op mul flare_used_pow flare_pow s1
+set tot_unit flare
+set tot_power flare_pow
+set used_units flare_used
+set used_power flare_used_pow
+
+read horizon cell1 2
+op mul horizon_pow horizon 5
+op mul horizon_used horizon s2
+op mul horizon_used_pow horizon_pow s2
+op add tot_unit tot_unit horizon
+op add tot_power tot_power horizon_pow
+op add used_units used_units horizon_used
+op add used_power used_power horizon_used_pow
+
+read zenith cell1 3
+op mul zenith_pow zenith 30
+op mul zenith_used zenith s3
+op mul zenith_used_pow zenith_pow s3
+op add tot_unit tot_unit zenith
+op add tot_power tot_power zenith_pow
+op add used_units used_units zenith_used
+op add used_power used_power zenith_used_pow
+
+read antumbra cell1 4
+op mul antumbra_pow antumbra 100
+op mul antumbra_used antumbra s4
+op mul antumbra_used_pow antumbra_pow s4
+op add tot_unit tot_unit antumbra
+op add tot_power tot_power antumbra_pow
+op add used_units used_units antumbra_used
+op add used_power used_power antumbra_used_pow
+
+read eclipse cell1 5
+op mul eclipse_pow eclipse 500
+op mul eclipse_used eclipse s5
+op mul eclipse_used_pow eclipse_pow s5
+op add tot_unit tot_unit eclipse
+op add tot_power tot_power eclipse_pow
+op add used_units used_units eclipse_used
+op add used_power used_power eclipse_used_pow
+
+read quasar cell1 6
+op mul quasar_pow quasar 20
+op mul quasar_used quasar s6
+op mul quasar_used_pow quasar_pow s6
+op add tot_unit tot_unit quasar
+op add tot_power tot_power quasar_pow
+op add used_units used_units quasar_used
+op add used_power used_power quasar_used_pow
+
+read vela cell1 7
+op mul vela_pow vela 80
+op mul vela_used vela s7
+op mul vela_used_pow vela_pow s7
+op add tot_unit tot_unit vela
+op add tot_power tot_power vela_pow
+op add used_units used_units vela_used
+op add used_power used_power vela_used_pow
+
+read quad cell1 8
+op mul quad_pow quad 120
+op mul quad_used quad s8
+op mul quad_used_pow quad_pow s8
+op add tot_unit tot_unit quad
+op add tot_power tot_power quad_pow
+op add used_units used_units quad_used
+op add used_power used_power quad_used_pow
+
+read oct cell1 9
+op mul oct_pow oct 350
+op mul oct_used oct s9
+op mul oct_used_pow oct_pow s9
+op add tot_unit tot_unit oct
+op add tot_power tot_power oct_pow
+op add used_units used_units oct_used
+op add used_power used_power oct_used_pow
+
+write tot_unit cell1 10
+write tot_power cell1 11
+write used_units cell1 12
+write used_power cell1 13
+
+jump END greaterThan max_used_power used_power
+set max_used_power used_power
+write max_used_power cell1 17
+END:
+end
