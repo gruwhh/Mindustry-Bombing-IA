@@ -1,0 +1,115 @@
+
+set sum 0
+read unit_other_processor cell1 20
+op add sum sum unit_other_processor
+read unit_other_processor cell1 21
+op add sum sum unit_other_processor
+read unit_other_processor cell1 22
+op add sum sum unit_other_processor
+read unit_other_processor cell1 23
+op add sum sum unit_other_processor
+read unit_other_processor cell1 24
+op add sum sum unit_other_processor
+read unit_other_processor cell1 25
+op add sum sum unit_other_processor
+read unit_other_processor cell1 26
+op add sum sum unit_other_processor
+read unit_other_processor cell1 27
+op add sum sum unit_other_processor
+read unit_other_processor cell1 28
+op add sum sum unit_other_processor
+
+set mode_sorter_error 1
+set target_sorter_error 1
+set usage_sorter_error 1
+set is_errors 0
+
+print "[#e75dfc]Bombing Ai\n\n"
+sensor ON switch1 @enabled
+print "[white]Current status : "
+jump on equal ON true
+control config sorter1 @blast-compound 0 0 0
+print "[red]OFF\n\n"
+print "[white]The [#83f57d]ON[white]/[#fa8e82]OFF [white]switch is on the other side of the arc."
+printflush message1
+end
+
+on:
+print "[green]ON\n\n"
+sensor player_ctrl arc1 @controlled
+jump mode_label notEqual player_ctrl @ctrlPlayer
+print "[#6ec0ff]Player controled"
+set mode_sorter_error 0
+set target_sorter_error 0
+jump usage_label always 0 0
+
+mode_label:
+sensor mode sorter2 @config
+jump s2_lead notEqual mode @copper
+print "[white]Mode : [red]Attack"
+set mode_sorter_error 0
+s2_lead:
+jump s2_glass notEqual mode @lead
+print "[white]Mode : [#ab53cf]Idle"
+set mode_sorter_error 0
+s2_glass:
+jump target_label notEqual mode @metaglass
+read attack cell1 0
+set mode_sorter_error 0
+jump periodic_idle equal attack 0
+print "[white]Mode : Periodic Attacks\nCurrently [red]Attacking"
+jump target_label always 0 0
+periodic_idle:
+print "[white]Mode : Periodic Attacks\nCurrently [#ab53cf]Idle"
+
+target_label:
+sensor target sorter3 @config
+jump s3_lead notEqual target @copper
+print "\n[orange]Targetting Cores"
+set target_sorter_error 0
+s3_lead:
+jump s3_glass notEqual target @lead
+print "\n[#ab53cf]Targetting defences"
+set target_sorter_error 0
+s3_glass:
+jump s3_thor notEqual target @metaglass
+print "\n[orange]Targetting Cores\n[white]Clear 30 tile radius"
+set target_sorter_error 0
+s3_thor:
+jump usage_label notEqual target @thorium
+print "\n[orange]Targetting Cores\n[#ee68c1]Clear 60 tile radius"
+set target_sorter_error 0
+
+usage_label:
+sensor unit_usage sorter4 @config
+jump s4_lead notEqual unit_usage @copper
+print "\n\n[white]Unit usage : [red]Use all units"
+set usage_sorter_error 0
+s4_lead:
+jump s4_glass notEqual unit_usage @lead
+print "\n\n[white]Unit usage : [#83f57d]Save units"
+set usage_sorter_error 0
+s4_glass:
+jump warnings notEqual unit_usage @metaglass
+print "\n\n[white]Unit usage : [white]Auto"
+set usage_sorter_error 0
+
+warnings:
+op add is_errors mode_sorter_error target_sorter_error
+op add is_errors is_errors usage_sorter_error
+jump all_good equal is_errors 0
+control config sorter1 @pyratite
+print "[orange]\n\nWARNINGS :"
+jump target_error notEqual mode_sorter_error 1
+print "\nSelected config for mode sorter not valid."
+target_error:
+jump usage_error notEqual target_sorter_error 1
+print "\nSelected config for target sorter not valid."
+usage_error:
+jump END notEqual usage_sorter_error 1
+print "\nSelected config for unit usage sorter not valid."
+
+all_good:
+control config sorter1 @plastanium
+END:
+printflush message1
