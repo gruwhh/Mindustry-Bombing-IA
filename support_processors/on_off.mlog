@@ -1,22 +1,103 @@
-sensor on switch1 @enabled
-jump ai_on equal on true
-control enabled processor1 0 0 0 0
-control enabled processor2 0 0 0 0
-control enabled processor3 0 0 0 0
-control enabled processor4 0 0 0 0
-control enabled processor5 0 0 0 0
-control enabled processor6 0 0 0 0
-control enabled processor7 0 0 0 0
-control enabled processor8 0 0 0 0
-control enabled processor9 0 0 0 0
+sensor flare switch1 @enabled
+sensor horizon switch2 @enabled
+sensor zenith switch3 @enabled
+sensor antumbra switch4 @enabled
+sensor eclipse switch5 @enabled
+sensor quad switch6 @enabled
+sensor quasar switch7 @enabled
+sensor vela switch8 @enabled
+sensor oct switch9 @enabled
+sensor on_switch switch10 @enabled
+sensor payload switch11 @enabled
+
+jump ON equal on_switch true
+control enabled processor1 0
+control enabled processor2 0
+control enabled processor3 0
+control enabled processor4 0
+control enabled processor5 0
+control enabled processor6 0
+control enabled processor7 0
+control enabled processor8 0
+control enabled processor9 0
+control enabled processor10 0
+control enabled processor11 0
+control enabled processor12 0
 end
-ai_on:
-control enabled processor1 1 0 0 0
-control enabled processor2 1 0 0 0
-control enabled processor3 1 0 0 0
-control enabled processor4 1 0 0 0
-control enabled processor5 1 0 0 0
-control enabled processor6 1 0 0 0
-control enabled processor7 1 0 0 0
-control enabled processor8 1 0 0 0
-control enabled processor9 1 0 0 0
+
+ON:
+jump flare_off notEqual flare true
+control enabled processor1 1
+jump horizon_label always
+flare_off:
+control enabled processor1 0
+
+horizon_label:
+jump horizon_off notEqual horizon true
+control enabled processor2 1
+jump zenith_label always
+horizon_off:
+control enabled processor2 0
+
+zenith_label:
+jump zenith_off notEqual zenith true
+control enabled processor3 1
+jump antumbra_label always
+zenith_off:
+control enabled processor3 0
+
+antumbra_label:
+jump antumbra_off notEqual antumbra true
+control enabled processor4 1
+jump eclipse_label always
+antumbra_off:
+control enabled processor4 0
+
+eclipse_label:
+jump eclipse_off notEqual eclipse true
+control enabled processor5 1
+jump quad_label always
+eclipse_off:
+control enabled processor5 0
+
+quad_label:
+jump quad_off notEqual quad true
+control enabled processor6 1
+jump quasar_label always
+quad_off:
+control enabled processor6 0
+
+quasar_label:
+jump quasar_off notEqual quasar true
+control enabled processor7 1
+jump vela_label always
+quasar_off:
+control enabled processor7 0
+
+vela_label:
+jump vela_off notEqual vela true
+control enabled processor8 1
+jump oct_label always
+vela_off:
+control enabled processor8 0
+
+oct_label:
+jump oct_off notEqual oct true
+control enabled processor9 1
+jump payload_label always
+oct_off:
+control enabled processor9 0
+
+payload_label:
+jump payload_off notEqual payload true
+control enabled processor10 1
+control enabled processor11 1
+control enabled processor12 1
+jump END always
+payload_off:
+control enabled processor10 0
+control enabled processor11 0
+control enabled processor12 0
+
+END:
+end
