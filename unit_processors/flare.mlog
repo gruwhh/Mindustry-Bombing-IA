@@ -16,7 +16,7 @@ blast_recup:
 ulocate building storage false 0 0 0 0 vault
 ucontrol itemTake vault @blast-compound 999 0 0
 set radius 16
-jump idle_pickup always 0 0
+jump idle_pickup always
 
 unit_controls:
 sensor player_ctrl wave1 @controlled
@@ -35,7 +35,7 @@ op mul idle_vect_x vect2def_x idle_vect_len
 op mul idle_vect_y vect2def_y idle_vect_len
 op add center_idle_x idle_vect_x def_x
 op add center_idle_y idle_vect_y def_y
-jump idle_near_def always 0 0
+jump idle_near_def always
 
 # IDLE FUNCTION
 idle_pickup:	#idle but picking up blast
@@ -60,27 +60,27 @@ end
 player_controled:
 sensor target_x arc1 @shootX
 sensor target_y arc1 @shootY
-jump attack_target always 0 0
+jump attack_target always
 
 attacking:
 sensor target_config sorter1 @config
 jump turret_only notEqual target_config @copper
 ulocate building core true 0 target_x target_y 0 0
-jump attack_target always 0 0
+jump attack_target always
 turret_only:
 jump clear_small notEqual target_config @lead
 ulocate building turret true 0 target_x target_y 0 0
-jump attack_target always 0 0
+jump attack_target always
 clear_small:
 jump clear_large notEqual target_config @metaglass
 ulocate building core true @copper target_x target_y 0 0
 ucontrol within target_x target_y 30 turret_in_range 0
-jump target_turret always 0 0
+jump target_turret always
 clear_large:
 jump END notEqual target_config @thorium
 ulocate building core true @copper target_x target_y 0 0
 ucontrol within target_x target_y 60 turret_in_range 0
-jump target_turret always 0 0
+jump target_turret always
 
 target_turret: 	#for the range clearing targetting
 jump attack_target equal turret_in_range 1

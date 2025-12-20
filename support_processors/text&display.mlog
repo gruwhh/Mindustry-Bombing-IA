@@ -1,4 +1,4 @@
-draw clear 0 0 0 0 0 0
+draw clear 0 0 0
 sensor s1 switch1 @enabled
 sensor s2 switch2 @enabled
 sensor s3 switch3 @enabled
@@ -11,61 +11,61 @@ sensor s9 switch9 @enabled
 
 # draw screen background
 jump 13 notEqual s1 1
-draw col %00ff00 0 0 0 0 0
-jump 14 always 0 0
-draw col %ff0000 0 0 0 0 0
-draw rect 0 54 26 26 0 0
+draw col %00ff00
+jump 14 always
+draw col %ff0000
+draw rect 0 54 26 26
 jump 18 notEqual s2 1
-draw col %00ff00 0 0 0 0 0
-jump 19 always 0 0
-draw col %ff0000 0 0 0 0 0
-draw rect 27 54 26 26 0 0
+draw col %00ff00
+jump 19 always
+draw col %ff0000
+draw rect 27 54 26 26
 jump 23 notEqual s3 1
-draw col %00ff00 0 0 0 0 0
-jump 24 always 0 0
-draw col %ff0000 0 0 0 0 0
-draw rect 54 54 26 26 0 0
+draw col %00ff00
+jump 24 always
+draw col %ff0000
+draw rect 54 54 26 26
 jump 28 notEqual s4 1
-draw col %00ff00 0 0 0 0 0
-jump 29 always 0 0
-draw col %ff0000 0 0 0 0 0
-draw rect 0 27 26 26 0 0
+draw col %00ff00
+jump 29 always
+draw col %ff0000
+draw rect 0 27 26 26
 jump 33 notEqual s5 1
-draw col %00ff00 0 0 0 0 0
-jump 34 always 0 0
-draw col %ff0000 0 0 0 0 0
-draw rect 27 27 26 26 0 0
+draw col %00ff00
+jump 34 always
+draw col %ff0000
+draw rect 27 27 26 26
 jump 38 notEqual s6 1
-draw col %00ff00 0 0 0 0 0
-jump 39 always 0 0
-draw col %ff0000 0 0 0 0 0
-draw rect 54 27 26 26 0 0
+draw col %00ff00
+jump 39 always
+draw col %ff0000
+draw rect 54 27 26 26
 jump 43 notEqual s7 1
-draw col %00ff00 0 0 0 0 0
-jump 44 always 0 0
-draw col %ff0000 0 0 0 0 0
-draw rect 0 0 26 26 0 0
+draw col %00ff00
+jump 44 always
+draw col %ff0000
+draw rect 0 0 26 26
 jump 48 notEqual s8 1
-draw col %00ff00 0 0 0 0 0
-jump 49 always 0 0
-draw col %ff0000 0 0 0 0 0
-draw rect 27 0 26 26 0 0
+draw col %00ff00
+jump 49 always
+draw col %ff0000
+draw rect 27 0 26 26
 jump 53 notEqual s9 1
-draw col %00ff00 0 0 0 0 0
-jump 54 always 0 0
-draw col %ff0000 0 0 0 0 0
-draw rect 54 0 26 26 0 0
+draw col %00ff00
+jump 54 always
+draw col %ff0000
+draw rect 54 0 26 26
 
-draw col %ffffff 0 0 0 0 0
-draw image 13 67 @flare 20 0 0
-draw image 39 67 @horizon 20 0 0
-draw image 67 67 @zenith 20 0 0
-draw image 13 39 @antumbra 20 0 0
-draw image 39 39 @eclipse 20 0 0
-draw image 67 39 @quad 20 0 0
-draw image 13 13 @quasar 20 0 0
-draw image 39 13 @vela 20 0 0
-draw image 67 13 @oct 20 0 0
+draw col %ffffff
+draw image 13 67 @flare 20 0
+draw image 39 67 @horizon 20 0
+draw image 67 67 @zenith 20 0
+draw image 13 39 @antumbra 20 0
+draw image 39 39 @eclipse 20 0
+draw image 67 39 @quad 20 0
+draw image 13 13 @quasar 20 0
+draw image 39 13 @vela 20 0
+draw image 67 13 @oct 20 0
 drawflush display1
 
 # write message blocks
