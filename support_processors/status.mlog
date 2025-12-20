@@ -22,6 +22,7 @@ op add sum sum unit_other_processor
 set mode_sorter_error 1
 set target_sorter_error 1
 set usage_sorter_error 1
+set payload_switch_error 0
 set is_errors 0
 
 print "[#e75dfc]Bombing Ai\n\n"
@@ -90,24 +91,44 @@ jump s4_glass notEqual unit_usage @lead
 print "\n\n[white]Unit usage : [#83f57d]Save units"
 set usage_sorter_error 0
 s4_glass:
-jump warnings notEqual unit_usage @metaglass
+jump payload_label notEqual unit_usage @metaglass
 print "\n\n[white]Unit usage : [white]Auto"
 set usage_sorter_error 0
+
+payload_label:
+sensor payload switch2 @enabled
+read quad_num cell1 8
+read oct_num cell1 9
+op add paySpaceUnit_num quad_num oct_num
+jump pay_disabled notEqual payload @enabled
+print "\n[white]Payload use [#83f57d]enabled"
+jump warnings notEqual paySpaceUnit_num 0
+set payload_switch_error 1
+jump warnings always
+pay_disabled:
+print "\n[white]Payload [red]not used"
+
+
 
 warnings:
 op add is_errors mode_sorter_error target_sorter_error
 op add is_errors is_errors usage_sorter_error
+op add is_errors is_errors payload_switch_error
 jump all_good equal is_errors 0
 control config sorter1 @pyratite
 print "[orange]\n\nWARNINGS :"
 jump target_error notEqual mode_sorter_error 1
-print "\nSelected config for mode sorter not valid."
+print "\n- Selected config for mode sorter not valid."
 target_error:
 jump usage_error notEqual target_sorter_error 1
-print "\nSelected config for target sorter not valid."
+print "\n- Selected config for target sorter not valid."
 usage_error:
-jump END notEqual usage_sorter_error 1
-print "\nSelected config for unit usage sorter not valid."
+jump payload_error notEqual usage_sorter_error 1
+print "\n- Selected config for unit usage sorter not valid."
+payload_error:
+jump END notEqual payload_switch_error 1
+print "\n- There are no quad or oct that can be controled. Turn either of them on to use the playload feature."
+jump END always
 
 all_good:
 control config sorter1 @plastanium
