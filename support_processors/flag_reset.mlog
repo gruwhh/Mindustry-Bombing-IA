@@ -1,0 +1,29 @@
+ubind @flare
+ucontrol flag 0
+ubind @horizon
+ucontrol flag 0
+ubind @zenith
+ucontrol flag 0
+ubind @antumbra
+ucontrol flag 0
+ubind @eclipse
+ucontrol flag 0
+ubind @quasar
+ucontrol flag 0
+ubind @vela
+ucontrol flag 0
+ubind @quad
+ucontrol flag 0
+ubind @oct
+ucontrol flag 0
+ubind @spiroct
+ucontrol flag 0
+ubind @arkyid
+ucontrol flag 0
+ubind @toxopid
+ucontrol flag 0
+
+#reset all units every 30s
+read total_units cell1 10
+op div wait_time 30 total_units 
+wait wait_time
