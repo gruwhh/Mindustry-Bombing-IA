@@ -97,6 +97,7 @@ write tot_power cell1 11
 write used_units cell1 12
 write used_power cell1 13
 
+op mul max_used_power max_used_power 0.99	# slowly decrease max to match unit prod if it decreases
 jump END greaterThan max_used_power used_power
 set max_used_power used_power
 write max_used_power cell1 17
