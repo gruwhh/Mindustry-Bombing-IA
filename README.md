@@ -12,3 +12,6 @@ The code files take the mlog extention but the processors contain only the code 
 The code is separated in 2 groups of processors :
 - The unit processors contain the code to directly control the units.
 - The support processors control general info about the schematic's operation like which units are used, wether to attack or not and display on the screen, in the sorters and on the message blocks all the info about the schematic's operation.
+
+## /!\ The code may not correspond to the current version on the bombing logic /!\
+The code you see is the code from the version I am working on, and not the code from the schematic. The schematic is the last released version. Sorry for the poor project management. 
