@@ -16,10 +16,12 @@ blast_recup:
 ulocate building storage false 0 0 0 0 vault
 ucontrol itemTake vault @blast-compound 999 0 0
 set radius 16
-jump idle_pickup always
+sensor center_idle_x cell1 @x
+sensor center_idle_y cell1 @y
+jump idle always
 
 unit_controls:
-sensor player_ctrl wave1 @controlled
+sensor player_ctrl arc1 @controlled
 jump player_controled equal player_ctrl @ctrlPlayer
 read attack cell1 0
 jump attacking equal attack 1
@@ -35,13 +37,10 @@ op mul idle_vect_x vect2def_x idle_vect_len
 op mul idle_vect_y vect2def_y idle_vect_len
 op add center_idle_x idle_vect_x def_x
 op add center_idle_y idle_vect_y def_y
-jump idle_near_def always
+jump idle always
 
 # IDLE FUNCTION
-idle_pickup:	#idle but picking up blast
-sensor center_idle_x cell1 @x
-sensor center_idle_y cell1 @y
-idle_near_def:	#idle mode
+idle:
 op sub dx unit_x center_idle_x
 op sub dy unit_y center_idle_y
 op sub px1 dx dy
