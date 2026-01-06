@@ -1,28 +1,64 @@
 ubind @flare
+sensor flag @unit @flag
+jump horizon equal flag 0
 ucontrol flag 0
+horizon:
 ubind @horizon
+sensor flag @unit @flag
+jump zenith equal flag 0
 ucontrol flag 0
+zenith:
 ubind @zenith
+sensor flag @unit @flag
+jump antumbra equal flag 0
 ucontrol flag 0
+antumbra:
 ubind @antumbra
+sensor flag @unit @flag
+jump eclipse equal flag 0
 ucontrol flag 0
+eclipse:
 ubind @eclipse
+sensor flag @unit @flag
+jump quasar equal flag 0
 ucontrol flag 0
+quasar:
 ubind @quasar
+sensor flag @unit @flag
+jump vela equal flag 0
 ucontrol flag 0
+vela:
 ubind @vela
+sensor flag @unit @flag
+jump quad equal flag 0
 ucontrol flag 0
+quad:
 ubind @quad
+sensor flag @unit @flag
+jump oct equal flag 0
 ucontrol flag 0
+oct:
 ubind @oct
+sensor flag @unit @flag
+jump spiroct equal flag 0
 ucontrol flag 0
+spiroct:
 ubind @spiroct
+sensor flag @unit @flag
+jump arkyid equal flag 0
 ucontrol flag 0
+arkyid:
 ubind @arkyid
+sensor flag @unit @flag
+jump toxopid equal flag 0
 ucontrol flag 0
+toxopid:
 ubind @toxopid
+sensor flag @unit @flag
+jump wait equal flag 0
 ucontrol flag 0
 
+wait:
 #reset all units every 30s
 read total_units cell1 10
 op div wait_time 30 total_units 
