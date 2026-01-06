@@ -58,8 +58,8 @@ op add used_power used_power eclipse_used_pow
 
 read quasar cell1 6
 op mul quasar_pow quasar 20
-op mul quasar_used quasar s6
-op mul quasar_used_pow quasar_pow s6
+op mul quasar_used quasar s7
+op mul quasar_used_pow quasar_pow s7
 op add tot_unit tot_unit quasar
 op add tot_power tot_power quasar_pow
 op add used_units used_units quasar_used
@@ -67,8 +67,8 @@ op add used_power used_power quasar_used_pow
 
 read vela cell1 7
 op mul vela_pow vela 80
-op mul vela_used vela s7
-op mul vela_used_pow vela_pow s7
+op mul vela_used vela s8
+op mul vela_used_pow vela_pow s8
 op add tot_unit tot_unit vela
 op add tot_power tot_power vela_pow
 op add used_units used_units vela_used
@@ -76,8 +76,8 @@ op add used_power used_power vela_used_pow
 
 read quad cell1 8
 op mul quad_pow quad 120
-op mul quad_used quad s8
-op mul quad_used_pow quad_pow s8
+op mul quad_used quad s6
+op mul quad_used_pow quad_pow s6
 op add tot_unit tot_unit quad
 op add tot_power tot_power quad_pow
 op add used_units used_units quad_used
