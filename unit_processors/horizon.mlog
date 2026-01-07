@@ -4,23 +4,7 @@ jump END notEqual flag 0
 sensor unit_x @unit @x
 sensor unit_y @unit @y
 
-
-sensor item_cap @unit @itemCapacity
-sensor blast @unit @blast-compound
-sensor items @unit @totalItems
-jump unit_controls equal item_cap blast	
-jump blast_recup equal items blast
-ucontrol itemDrop @air 999 0 0 0
-
-blast_recup:
-ulocate building storage false 0 0 0 0 vault
-ucontrol itemTake vault @blast-compound 999 0 0
-set radius 16
-sensor center_idle_x cell1 @x
-sensor center_idle_y cell1 @y
-jump idle always
-
-unit_controls:
+# unit controls
 sensor player_ctrl arc1 @controlled
 jump player_controled equal player_ctrl @ctrlPlayer
 read attack cell1 0
