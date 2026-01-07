@@ -5,12 +5,22 @@ sensor unit_x @unit @x
 sensor unit_y @unit @y
 
 
+sensor cell_x cell1 @x
+sensor cell_y cell1 @y
+sensor payload switch1 @enabled
+sensor payload_used @unit @totalPayload
 sensor item_cap @unit @itemCapacity
 sensor blast @unit @blast-compound
 sensor items @unit @totalItems
-jump unit_controls equal item_cap blast	
+jump drop_items notEqual item_cap blast
+jump unit_controls greaterThanEq payload_used 1
+jump pay_recup equal payload 1
+jump unit_controls always
+
+drop_items:
 jump blast_recup equal items blast
 ucontrol itemDrop @air 999 0 0 0
+jump blast_recup always
 
 blast_recup:
 ulocate building storage false 0 0 0 0 vault
@@ -20,6 +30,16 @@ sensor center_idle_x cell1 @x
 sensor center_idle_y cell1 @y
 jump idle always
 
+pay_recup:
+jump idle notEqual payload 1	#get units from the middle if the payload space is empty
+jump idle greaterThanEq payload_used 1 
+ulocate building turret true 0 target_x target_y 0 0
+ucontrol within target_x target_y 45 in_range_for_attack
+jump unit_controls equal in_range_for_attack 1
+ucontrol payTake 1
+ucontrol move center_idle_x center_idle_y
+end
+
 unit_controls:
 sensor player_ctrl arc1 @controlled
 jump player_controled equal player_ctrl @ctrlPlayer
@@ -27,12 +47,10 @@ read attack cell1 0
 jump attacking equal attack 1
 set radius 40		#compute idle center when units idle near deffences
 ulocate building turret true @copper def_x def_y 0 0
-sensor cell_x cell1 @x
-sensor cell_y cell1 @y
 op sub vect2def_x cell_x def_x
 op sub vect2def_y cell_y def_y
 op len vect2def_len vect2def_x vect2def_y
-op div idle_vect_len 120 vect2def_len
+op div idle_vect_len 120 vect2def_len	#dist to defence = 120 - 40(radius) = 80
 op mul idle_vect_x vect2def_x idle_vect_len
 op mul idle_vect_y vect2def_y idle_vect_len
 op add center_idle_x idle_vect_x def_x
@@ -52,9 +70,7 @@ op mul py p_len py1
 op add next_pos_x center_idle_x px
 op add next_pos_y center_idle_y py
 ucontrol move next_pos_x next_pos_y
-uradar enemy any any health 0 1 enemy
-ucontrol targetp enemy 1 1 0 0
-end
+jump drop_payload always
 
 player_controled:
 sensor target_x arc1 @shootX
@@ -86,6 +102,18 @@ jump attack_target equal turret_in_range 1
 ulocate building turret true 0 target_x target_y 0 0
 attack_target:
 ucontrol move target_x target_y 0 0 0
+
+drop_payload:
+jump END notEqual payload 1
+ucontrol within target_x target_y 5 in_range_for_drop
+jump drop equal in_range_for_drop 1
+sensor hp @unit @health
+sensor max_hp @unit @maxHealth
+op div health_percentage hp max_hp
+jump drop lessThanEq health_percentage 0.3
+jump END always
+drop:
+ucontrol payDrop
 
 END:
 end

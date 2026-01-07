@@ -3,7 +3,7 @@ sensor flag @unit @flag
 jump END notEqual flag 0
 sensor unit_x @unit @x
 sensor unit_y @unit @y
-sensor range @unit @range
+
 
 sensor cell_x cell1 @x
 sensor cell_y cell1 @y
@@ -103,15 +103,7 @@ target_turret: 	#for the range clearing targetting
 jump attack_target equal turret_in_range 1
 ulocate building turret true 0 target_x target_y 0 0
 attack_target:
-op sub vect2target_x target_x unit_x
-op sub vect2target_y target_y unit_y
-op len vect2target_len vect2target_x vect2target_y
-op div vect_shoot_len range vect2target_len
-op mul vect_shoot_x vect2target_x vect_shoot_len
-op mul vect_shoot_y vect2target_y vect_shoot_len
-op add shoot_x vect_shoot_x unit_x
-op add shoot_y vect_shoot_y unit_y
-ucontrol target shoot_x shoot_y 1 0 0
+ucontrol target unit_x unit_y 1 0 0
 ucontrol move target_x target_y 0 0 0
 
 drop_payload:
@@ -125,8 +117,6 @@ jump drop lessThanEq health_percentage 0.3
 jump END always
 drop:
 ucontrol payDrop
-
-
 
 END:
 end
