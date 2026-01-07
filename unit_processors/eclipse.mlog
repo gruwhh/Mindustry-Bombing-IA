@@ -1,0 +1,100 @@
+ubind @eclipse
+sensor flag @unit @flag
+jump END notEqual flag 0
+sensor unit_x @unit @x
+sensor unit_y @unit @y
+sensor range @unit @range
+
+sensor item_cap @unit @itemCapacity
+sensor blast @unit @blast-compound
+sensor items @unit @totalItems
+jump unit_controls equal item_cap blast	
+jump blast_recup equal items blast
+ucontrol itemDrop @air 999 0 0 0
+
+blast_recup:
+ulocate building storage false 0 0 0 0 vault
+ucontrol itemTake vault @blast-compound 999 0 0
+set radius 16
+sensor center_idle_x cell1 @x
+sensor center_idle_y cell1 @y
+jump idle always
+
+unit_controls:
+sensor player_ctrl arc1 @controlled
+jump player_controled equal player_ctrl @ctrlPlayer
+read attack cell1 0
+jump attacking equal attack 1
+set radius 40		#compute idle center when units idle near deffences
+ulocate building turret true @copper def_x def_y 0 0
+sensor cell_x cell1 @x
+sensor cell_y cell1 @y
+op sub vect2def_x cell_x def_x
+op sub vect2def_y cell_y def_y
+op len vect2def_len vect2def_x vect2def_y
+op div idle_vect_len 120 vect2def_len
+op mul idle_vect_x vect2def_x idle_vect_len
+op mul idle_vect_y vect2def_y idle_vect_len
+op add center_idle_x idle_vect_x def_x
+op add center_idle_y idle_vect_y def_y
+jump idle always
+
+# IDLE FUNCTION
+idle:
+op sub dx unit_x center_idle_x
+op sub dy unit_y center_idle_y
+op sub px1 dx dy
+op add py1 dx dy
+op len p1_len px1 py1
+op div p_len radius p1_len
+op mul px p_len px1
+op mul py p_len py1
+op add next_pos_x center_idle_x px
+op add next_pos_y center_idle_y py
+ucontrol move next_pos_x next_pos_y
+uradar enemy any any health 0 1 enemy
+ucontrol targetp enemy 1 1 0 0
+end
+
+player_controled:
+sensor target_x arc1 @shootX
+sensor target_y arc1 @shootY
+jump attack_target always
+
+attacking:
+sensor target_config sorter1 @config
+jump turret_only notEqual target_config @copper
+ulocate building core true 0 target_x target_y 0 0
+jump attack_target always
+turret_only:
+jump clear_small notEqual target_config @lead
+ulocate building turret true 0 target_x target_y 0 0
+jump attack_target always
+clear_small:
+jump clear_large notEqual target_config @metaglass
+ulocate building core true @copper target_x target_y 0 0
+ucontrol within target_x target_y 30 turret_in_range 0
+jump target_turret always
+clear_large:
+jump END notEqual target_config @thorium
+ulocate building core true @copper target_x target_y 0 0
+ucontrol within target_x target_y 60 turret_in_range 0
+jump target_turret always
+
+target_turret: 	#for the range clearing targetting
+jump attack_target equal turret_in_range 1
+ulocate building turret true 0 target_x target_y 0 0
+attack_target:
+op sub vect2target_x target_x unit_x
+op sub vect2target_y target_y unit_y
+op len vect2target_len vect2target_x vect2target_y
+op div vect_shoot_len range vect2target_len
+op mul vect_shoot_x vect2target_x vect_shoot_len
+op mul vect_shoot_y vect2target_y vect_shoot_len
+op add shoot_x vect_shoot_x unit_x
+op add shoot_y vect_shoot_y unit_y
+ucontrol target shoot_x shoot_y 1 0 0
+ucontrol move target_x target_y 0 0 0
+
+END:
+end
