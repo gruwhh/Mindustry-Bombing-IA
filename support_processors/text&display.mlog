@@ -87,7 +87,7 @@ print "[white] Metaglass  : Clear around cores (30 tile radius)\n\n"
 print "[white] [#ee68c1]Thorium [white] [#ee68c1]: Clear around cores (60 tile radius)"
 printflush message3
 
-print "          [#6ec0ff]UNIT USAGE\n\n"
+print "          [#6ec0ff]UNIT USAGE\n[orange]COMMING SOON\n\n"
 print "[white] [#ff9b38]Copper [white] [#ff9b38]: Agressive\n\n"
 print "[white] [#ab53cf]Lead [white] [#ab53cf]: Save units\n\n"
 print "[white] Metaglass  : Auto"
@@ -98,8 +98,8 @@ print "[#83f57d]Quad [white]and [#83f57d]Oct [white]take "
 print "[#c56fe8]Spiroct[white], [#c56fe8]Arkyid [white]and [#c56fe8]Toxopid [white]units in payload and drop them on enemy defences"
 printflush message5
 
-print "             [#6ec0ff]FULL AUTO\n\n"
-print "[white]Changes the [#6ec0ff]parameters [white]dynamically to try to maximise efficency.\n"
+print "             [#6ec0ff]FULL AUTO\n[orange]COMMING SOON\n\n"
+print "[white]Changes the [#6ec0ff]parameters [white]automatically to try to maximise efficency.\n"
 print "[red]This parameter doesnt always make the best choices. Manual control is advised if you watch carfully the functionement."
 printflush message6
 
@@ -121,5 +121,8 @@ print "- A Periodic attack Mode.\n"
 print "- Units take blast-compound from any vault on their path.\n"
 print "- Able to use the payload space of units."
 printflush message8
+
+print "[orange]COMMING SOON"
+printflush message9
 
 control enabled arc1 0

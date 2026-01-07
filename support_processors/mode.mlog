@@ -1,10 +1,12 @@
 sensor config sorter1 @config
 jump idle notEqual config @copper
 write 1 cell1 0
+end
 
 idle:
 jump periodic_att notEqual config @lead
 write 0 cell1 0
+end
 
 periodic_att:
 jump END notEqual config @metaglass

@@ -84,7 +84,7 @@ set target_sorter_error 0
 usage_label:
 sensor unit_usage sorter4 @config
 jump s4_lead notEqual unit_usage @copper
-print "\n\n[white]Unit usage : [red]Use all units"
+print "\n\n[white]Unit usage : [orange]Use all units"
 set usage_sorter_error 0
 s4_lead:
 jump s4_glass notEqual unit_usage @lead
@@ -106,7 +106,7 @@ jump warnings notEqual paySpaceUnit_num 0
 set payload_switch_error 1
 jump warnings always
 pay_disabled:
-print "\n[white]Payload [red]not used"
+print "\n[white]Payload use [red]disabled"
 
 
 
