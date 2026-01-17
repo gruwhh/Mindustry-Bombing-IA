@@ -1,47 +1,68 @@
 set type @flare
 set write_adr 1
+set has_payload 0
 jump start always
 set type @horizon
 set write_adr 2
+set has_payload 0
 jump start always
 set type @zenith
 set write_adr 3
+set has_payload 0
 jump start always
 set type @antumbra
 set write_adr 4
+set has_payload 0
 jump start always
 set type @eclipse
 set write_adr 5
+set has_payload 0
 jump start always
 set type @quasar
 set write_adr 6
+set has_payload 0
 jump start always
 set type @vela
 set write_adr 7
+set has_payload 0
 jump start always
 set type @quad
 set write_adr 8
+set has_payload 1
 jump start always
 set type @oct
 set write_adr 9
-set next_unit -3
+set next_unit -4
+set has_payload 1
 jump start always
+
 start:
 ubind type
 jump output equal @unit null
 jump output equal @unit first_unit
 jump increment_count notEqual first_unit null
 set first_unit @unit
+
 increment_count:
 op add unit_count unit_count 1
+jump no_payload_incr equal has_payload 0
+sensor payload @unit @totalPayload
+op add payload_used payload_used payload
+no_payload_incr:
 sensor dead first_unit @dead
 jump output equal dead 1
 jump start always
+
 output:
-op add next_unit next_unit 3
+op add next_unit next_unit 4
 write unit_count cell1 write_adr	# adresses between 1 and 9. 1=flare, 2=horizon, ..., 9=oct
 set unit_count 0
+jump no_payload_out equal has_payload 0
+op add payload_adr write_adr 2
+write payload_used cell1 payload_adr
+set payload_used 0
+no_payload_out:
 set first_unit null
 set @counter next_unit
 
-
+# all adresses: 1=flare, 2=horizon, ..., 9=oct, 10=quad_payload, 11=oct_payload
