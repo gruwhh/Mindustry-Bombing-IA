@@ -60,6 +60,6 @@ ucontrol flag 0
 
 wait:
 #reset all units every 30s
-read total_units cell1 10
+read total_units cell1 12
 op div wait_time 30 total_units 
 wait wait_time

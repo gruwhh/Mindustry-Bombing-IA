@@ -8,6 +8,7 @@ sensor s7 switch7 @enabled
 sensor s8 switch8 @enabled
 sensor s9 switch9 @enabled
 
+sensor payload switch10 @enabled
 # unit_pow variable uses a magic number to estimate the impact of a single unit
 # these values are subject to change
 
@@ -74,6 +75,7 @@ op add tot_power tot_power vela_pow
 op add used_units used_units vela_used
 op add used_power used_power vela_used_pow
 
+jump using_payload equal payload 1
 read quad cell1 8
 op mul quad_pow quad 120
 op mul quad_used quad s6
@@ -91,15 +93,37 @@ op add tot_unit tot_unit oct
 op add tot_power tot_power oct_pow
 op add used_units used_units oct_used
 op add used_power used_power oct_used_pow
+jump output always
 
-write tot_unit cell1 10
-write tot_power cell1 11
-write used_units cell1 12
-write used_power cell1 13
+using_payload:
+read quad cell1 10
+op mul quad_pow quad 200
+op mul quad_used quad s6
+op mul quad_used_pow quad_pow s6
+op add tot_unit tot_unit quad
+op add tot_power tot_power quad_pow
+op add used_units used_units quad_used
+op add used_power used_power quad_used_pow
+
+read oct cell1 11
+op mul oct_pow oct 450
+op mul oct_used oct s9
+op mul oct_used_pow oct_pow s9
+op add tot_unit tot_unit oct
+op add tot_power tot_power oct_pow
+op add used_units used_units oct_used
+op add used_power used_power oct_used_pow	
+
+output:
+write tot_unit cell1 12
+write tot_power cell1 13
+write used_units cell1 14
+write used_power cell1 15
 
 op mul max_used_power max_used_power 0.99	# slowly decrease max to match unit prod if it decreases
-jump END greaterThan max_used_power used_power
-set max_used_power used_power
-write max_used_power cell1 17
-END:
-end
+op max max_used_power max_used_power used_power
+write max_used_power cell1 16
+
+read unit_waiting_pickup cell1 18
+op mul unit_waiting_pickup unit_waiting_pickup 0.995
+write unit_waiting_pickup cell1 18

@@ -11,8 +11,8 @@ end
 periodic_att:
 jump END notEqual config @metaglass
 read attack cell1 0
-read attack_power cell1 13
-read max_attack_power cell1 17
+read attack_power cell1 15
+read max_attack_power cell1 16
 op mul attack_threshold max_attack_power 0.95
 op mul idle_threshold max_attack_power 0.1
 

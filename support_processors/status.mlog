@@ -1,23 +1,4 @@
 
-set sum 0
-read unit_other_processor cell1 20
-op add sum sum unit_other_processor
-read unit_other_processor cell1 21
-op add sum sum unit_other_processor
-read unit_other_processor cell1 22
-op add sum sum unit_other_processor
-read unit_other_processor cell1 23
-op add sum sum unit_other_processor
-read unit_other_processor cell1 24
-op add sum sum unit_other_processor
-read unit_other_processor cell1 25
-op add sum sum unit_other_processor
-read unit_other_processor cell1 26
-op add sum sum unit_other_processor
-read unit_other_processor cell1 27
-op add sum sum unit_other_processor
-read unit_other_processor cell1 28
-op add sum sum unit_other_processor
 
 set mode_sorter_error 1
 set target_sorter_error 1
@@ -132,5 +113,6 @@ jump END always
 
 all_good:
 control config sorter1 @plastanium
+print "[#83f57d]\n\nAll systems functional"
 END:
 printflush message1
