@@ -32,7 +32,9 @@ jump idle always
 
 pay_recup:
 jump idle notEqual payload 1	#get units from the middle if the payload space is empty
-jump idle greaterThanEq payload_used 1 
+read units_waiting cell1 19
+jump idle_near_defences lessThanEq units_waiting 0.9
+jump idle_near_defences greaterThanEq payload_used 1 
 ulocate building turret true 0 target_x target_y 0 0
 ucontrol within target_x target_y 45 in_range_for_attack
 jump unit_controls equal in_range_for_attack 1
@@ -45,6 +47,7 @@ sensor player_ctrl arc1 @controlled
 jump player_controled equal player_ctrl @ctrlPlayer
 read attack cell1 0
 jump attacking equal attack 1
+idle_near_defences:
 set radius 40		#compute idle center when units idle near deffences
 ulocate building turret true @copper def_x def_y 0 0
 op sub vect2def_x cell_x def_x

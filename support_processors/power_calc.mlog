@@ -124,6 +124,10 @@ op mul max_used_power max_used_power 0.99	# slowly decrease max to match unit pr
 op max max_used_power max_used_power used_power
 write max_used_power cell1 16
 
-read unit_waiting_pickup cell1 18
-op mul unit_waiting_pickup unit_waiting_pickup 0.995
-write unit_waiting_pickup cell1 18
+# we use this processor to decrease quad and oct wait time because they run in constant time
+read unit_waiting_pickup_quad cell1 18
+op mul unit_waiting_pickup_quad unit_waiting_pickup_quad 0.995
+write unit_waiting_pickup_quad cell1 18
+read unit_waiting_pickup_oct cell1 19
+op mul unit_waiting_pickup_oct unit_waiting_pickup_oct 0.995
+write unit_waiting_pickup_oct cell1 19
