@@ -117,7 +117,7 @@ printflush message7
 print "[#e75dfc]Bombing Ai v2.0\n[white]By [orange]Gruwhh "
 print "[#22a150]\n\n PROJECT GIT :\nhttps://github.com/gruwhh/Mindustry-Bombing-IA"
 print "\n\n[#e75dfc]Main Features :\n[white]"		#replace with ChangeLog for future versions
-print "- A Periodic attack Mode.\n"
+print "- Upgraded periodic attack Mode.\n"
 print "- Units take blast-compound from any vault on their path.\n"
 print "- Able to use the payload space of units."
 printflush message8
