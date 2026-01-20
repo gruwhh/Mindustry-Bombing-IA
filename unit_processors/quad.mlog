@@ -26,8 +26,10 @@ blast_recup:
 ulocate building storage false 0 0 0 0 vault
 ucontrol itemTake vault @blast-compound 999 0 0
 set radius 16
-sensor center_idle_x cell1 @x
-sensor center_idle_y cell1 @y
+sensor center_x cell1 @x
+sensor center_y cell1 @y
+set center_idle_x center_x
+set center_idle_y center_y
 jump idle always
 
 pay_recup:
@@ -39,7 +41,7 @@ ulocate building turret true 0 target_x target_y 0 0
 ucontrol within target_x target_y 45 in_range_for_attack
 jump unit_controls equal in_range_for_attack 1
 ucontrol payTake 1
-ucontrol move center_idle_x center_idle_y
+ucontrol move center_x center_y
 end
 
 unit_controls:
